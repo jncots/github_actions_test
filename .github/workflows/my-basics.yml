@@ -42,15 +42,30 @@ jobs:
         
       - name: Git clone my repo
         uses: actions/checkout@v1
+      
+      - name: List current folder after cloning
+        run : ls -la
   
   
   my_deploy:
     runs-on: ubuntu-latest
     needs: [my_testing]
     
+    env:
+      VAR1 : "This is Job Level Variable1"
+      VAR2 : "This is Job Level Variable2"
+    
     steps:
       - name: Print Hello Message in Deploy
         run : echo "Hello World from Deploy job"
+        
+      - name: Print job level env variables
+        run : |
+          echo "Var1 = ${{ env.VAR1 }}"
+          echo "Var2 = ${{ env.VAR2 }}"
+          echo "Var3 = $(LOCAL_VAR)"
+        env:
+          LOCAL_VAR: "This is local Environment variable for the step"
         
       - name: Printing Deployment package
         run : echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"

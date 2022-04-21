@@ -32,10 +32,16 @@ jobs:
         run : echo "Hello World from Testing job"
         
       - name: Execute few commands
-        run: |
+        run : |
           echo "Hello Message1"
           echo "Hello Message2"
           echo "Application name: ${{ env.APPLICATION_NAME }}"
+        
+      - name: List current folder
+        run : ls -la
+        
+      - name: Git clone my repo
+        uses: actions/checkout@v1
   
   
   my_deploy:
@@ -48,6 +54,13 @@ jobs:
         
       - name: Printing Deployment package
         run : echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
+        
+      - name: Lets test whether aws is here
+        run : aws --version
+        
+      - name: Lets test whether zip is here
+        run : zip --version
+        
 
 
 #   # Triggers the workflow on push or pull request events but only for the main branch

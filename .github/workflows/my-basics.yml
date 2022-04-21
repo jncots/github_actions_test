@@ -11,6 +11,11 @@
 # This name appears everywhere
 name: My-GitHubActions-Basics
 
+# Global environment variables which are seen from all jobs
+env:
+  APPLICATION_NAME       : "MyFlask"
+  DEPLOY_PACKAGE_NAME    : "flask-deploy-ver-${{ github.sha }}"
+
 # Controls when the workflow will run (use Ctrl+Space)
 on: 
   push:
@@ -25,6 +30,12 @@ jobs:
     steps:
       - name: Print Hello Message in Testing
         run : echo "Hello World from Testing job"
+        
+      - name: Execute few commands
+        run: |
+          echo "Hello Message1"
+          echo "Hello Message2"
+          echo "Application name: ${{ env.APPLICATION_NAME }}"
   
   
   my_deploy:
@@ -34,6 +45,9 @@ jobs:
     steps:
       - name: Print Hello Message in Deploy
         run : echo "Hello World from Deploy job"
+        
+      - name: Printing Deployment package
+        run : echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
 
 
 #   # Triggers the workflow on push or pull request events but only for the main branch

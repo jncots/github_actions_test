@@ -1,0 +1,43 @@
+name: Build_with_cibuildwheel_and_upload_to_PyPI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'Code/**'
+      - '!Code/tests/**'
+    tags:        
+      - 'release**' 
+  pull_request:
+    types:
+      - opened
+    branches:    
+      - master
+    paths:
+      - 'Code/**'
+      - '!Code/tests/**'
+
+jobs:
+  my_testing:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Print Hello Message in Testing
+        run : echo "Hello World from Testing job"
+        
+      - name: Execute few commands
+        run : |
+          echo "Hello Message1"
+          echo "Hello Message2"
+          echo "Application name: ${{ env.APPLICATION_NAME }}"
+        
+      - name: List current folder
+        run : ls -la
+        
+      - name: Git clone my repo
+        uses: actions/checkout@v1
+      
+      - name: List current folder after cloning
+        run : ls -la

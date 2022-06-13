@@ -6,3 +6,4 @@ for x in A:
         
 print("A = ", A)
 print("B = ", B)
+print("That is all!")

@@ -20,7 +20,9 @@ env:
 on: 
   push:
     branches:
-      - master
+      - some_other_branch
+      paths:
+      - 'Code/**'
       
       
 jobs:

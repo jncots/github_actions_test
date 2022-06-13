@@ -20,9 +20,10 @@ env:
 on: 
   push:
     branches:
-      - some_other_branch
-      paths:
+      - work_with_tests
+    paths:
       - 'Code/**'
+      - '!Code/tests/**'
       
       
 jobs:

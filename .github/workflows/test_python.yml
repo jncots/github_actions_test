@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.8"]
 
     steps:
     - uses: actions/checkout@v3
@@ -28,6 +28,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install pytest
+        python -m pip install coverage
         python -m pip install MCEq
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         ls -la
@@ -42,8 +43,23 @@ jobs:
 #         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
 
-    - name: Test MCEq with pytest
+    # - name: Test MCEq with pytest
+    #   run: |
+    #     cd ./MCEq_tests
+    #     echo $(pwd)
+    #     pytest
+
+    - name: Coverage measurements
       run: |
         cd ./MCEq_tests
         echo $(pwd)
-        pytest
+        coverage run --source=. -m pytest
+        coverage report -m
+        coverage html
+
+    - name: Upload coverage results  
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage_results
+        path: MCEq_tests/htmlcov/
+

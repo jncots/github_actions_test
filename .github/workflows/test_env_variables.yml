@@ -25,17 +25,17 @@ jobs:
         cd {package}/MCEq/tests &&
         pytest test_densities.py test_msis.py
 
-      steps:
-        - name: Sets command for testing for aarch64
-          if: ${{ matrix.os == 'ubuntu-latest' }}
-          run: |
-            echo "CIBW_TEST_COMMAND=${{ env.PYTEST_COMMAND_AARCH64 }}" >> $GITHUB_ENV
+    steps:
+      - name: Sets command for testing for aarch64
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+          echo "CIBW_TEST_COMMAND=${{ env.PYTEST_COMMAND_AARCH64 }}" >> $GITHUB_ENV
 
-        - name: Sets command for testing for other cases
-          if: ${{ !(matrix.os == 'ubuntu-latest') }}
-          run: |
-            echo "CIBW_TEST_COMMAND=${{ env.PYTEST_COMMAND }}" >> $GITHUB_ENV
-          
-        - name: Print CIBW_TEST_COMMAND
-          run: |
-            echo ${{ env.CIBW_TEST_COMMAND }}"
+      - name: Sets command for testing for other cases
+        if: ${{ !(matrix.os == 'ubuntu-latest') }}
+        run: |
+          echo "CIBW_TEST_COMMAND=${{ env.PYTEST_COMMAND }}" >> $GITHUB_ENV
+        
+      - name: Print CIBW_TEST_COMMAND
+        run: |
+          echo ${{ env.CIBW_TEST_COMMAND }}"

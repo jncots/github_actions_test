@@ -1,27 +1,39 @@
-
-
-name: Test_of_env_variables
+name: Test_of_matrix
 
 on:
   workflow_dispatch:
 
-# on: 
-#   push:
-#     branches:
-#       - work_with_tests
 
+env:
+  matrix1:
+    os: [ubuntu-latest, windows-latest, macos-latest]
+    arch: [native, aarch64, universal2]
+    py: [cp36, cp37, cp38, cp39, cp310]
 
+  matrix2:
+    os: [ubuntu-latest]
+    arch: [native]
+    py: [cp39]  
 
 
 
 jobs:
+
+  # choose_matrix:
+  #   name: Choose matrix based on something
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     matrix:
+  #       os: [ubuntu-latest, windows-latest]
+
+
   build:
     name: Wheel for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+      matrix: $${{ env.matrix2 }}
     env:
       PYTEST_COMMAND: pytest --pyargs MCEq
       PYTEST_COMMAND_AARCH64: >

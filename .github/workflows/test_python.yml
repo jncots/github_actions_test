@@ -4,9 +4,12 @@
 name: Testing_python_app
 
 on: 
-  push:
-    branches:
-      - work_with_tests
+  workflow_dispatch:
+
+# on: 
+#   push:
+#     branches:
+#       - work_with_tests
 
 
 jobs:

@@ -1,0 +1,41 @@
+
+
+name: Test_of_env_variables
+
+on: 
+  push:
+    branches:
+      - work_with_tests
+
+
+
+
+
+jobs:
+  build:
+    name: Wheel for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    env:
+      PYTEST_COMMAND: pytest --pyargs MCEq
+      PYTEST_COMMAND_AARCH64: >
+        cd {package}/MCEq/tests &&
+        pytest test_densities.py test_msis.py
+
+      steps:
+        - name: Sets command for testing for aarch64
+          if: ${{ matrix.os == 'ubuntu-latest' }}
+          run: |
+            echo "CIBW_TEST_COMMAND=${{ env.PYTEST_COMMAND_AARCH64 }}" >> $GITHUB_ENV
+
+        - name: Sets command for testing for other cases
+          if: ${{ !(matrix.os == 'ubuntu-latest') }}
+          run: |
+            echo "CIBW_TEST_COMMAND=${{ env.PYTEST_COMMAND }}" >> $GITHUB_ENV
+          
+        - name: Print CIBW_TEST_COMMAND
+          run: |
+            echo ${{ env.CIBW_TEST_COMMAND }}"

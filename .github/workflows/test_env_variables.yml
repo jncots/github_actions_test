@@ -39,3 +39,4 @@ jobs:
       - name: Print CIBW_TEST_COMMAND
         run: |
           echo "${{ env.CIBW_TEST_COMMAND }}"
+        shell: bash  

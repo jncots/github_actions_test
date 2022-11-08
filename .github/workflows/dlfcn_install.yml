@@ -29,6 +29,8 @@ jobs:
         compiler: gcc
         version: 11
 
+    - run: echo | cpp -v
+
     - run: |
         curl -LJO https://github.com/dlfcn-win32/dlfcn-win32/archive/refs/heads/master.zip
         unzip dlfcn-win32-master.zip

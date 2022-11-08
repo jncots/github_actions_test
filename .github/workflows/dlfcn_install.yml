@@ -20,7 +20,24 @@ jobs:
     #     ref: refs/heads/release
 
     - run: curl -LJO https://github.com/dlfcn-win32/dlfcn-win32/archive/refs/heads/master.zip
-    - run: ls -halt    
+    - run: unzip dlfcn-win32-master.zip
+    
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - uses: awvwgk/setup-fortran@main
+      id: setup-fortran
+      with:
+        compiler: gcc
+        version: 11
+
+
+    - run: python -m pip install --upgrade pip
+    - run: python -m pip install cmake
+    - run: cmake -S ./dlfcn-win32-master -B ./build_dlfcn
+    - run: cmake --build ./build_dlfcn
+    - run: cmake --install ./build_dlfcn
     # - uses: actions/checkout@v3
     #   with:
     #     submodules: true

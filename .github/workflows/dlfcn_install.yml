@@ -18,9 +18,6 @@ jobs:
     #   with:
     #     name: dlfcn-win32/dlfcn-win32
     #     ref: refs/heads/release
-
-    - run: curl -LJO https://github.com/dlfcn-win32/dlfcn-win32/archive/refs/heads/master.zip
-    - run: unzip dlfcn-win32-master.zip
     
     - uses: actions/setup-python@v2
       with:
@@ -32,12 +29,15 @@ jobs:
         compiler: gcc
         version: 11
 
+    - run: |
+        curl -LJO https://github.com/dlfcn-win32/dlfcn-win32/archive/refs/heads/master.zip
+        unzip dlfcn-win32-master.zip
+        python -m pip install --upgrade pip
+        python -m pip install cmake
+        cmake -S ./dlfcn-win32-master -B ./build_dlfcn -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+        cmake --build ./build_dlfcn
+        cmake --install ./build_dlfcn    
 
-    - run: python -m pip install --upgrade pip
-    - run: python -m pip install cmake
-    - run: cmake -S ./dlfcn-win32-master -B ./build_dlfcn -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
-    - run: cmake --build ./build_dlfcn
-    - run: cmake --install ./build_dlfcn
     # - uses: actions/checkout@v3
     #   with:
     #     submodules: true

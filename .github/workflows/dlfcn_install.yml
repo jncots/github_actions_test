@@ -14,11 +14,12 @@ jobs:
             python-version: "3.10"
       fail-fast: false
     steps:
-    - uses: actions/checkout@master
-      with:
-        name: dlfcn-win32/dlfcn-win32
-        ref: refs/heads/release
+    # - uses: actions/checkout@master
+    #   with:
+    #     name: dlfcn-win32/dlfcn-win32
+    #     ref: refs/heads/release
 
+    - run: curl -LJO https://github.com/dlfcn-win32/dlfcn-win32/archive/refs/heads/master.zip
     - run: ls -halt    
     # - uses: actions/checkout@v3
     #   with:

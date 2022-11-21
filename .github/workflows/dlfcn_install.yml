@@ -34,7 +34,7 @@ jobs:
     - run: |
         curl -LJO https://github.com/fxcoudert/gfortran-for-macOS/releases/download/12.1-monterey/gfortran-Intel-12.1-Monterey.dmg
         hdiutil attach gfortran-Intel-12.1-Monterey.dmg
-        sudo installer -package /Volumes/gfortran-Intel-12.1-Monterey/gfortran.pkg -target /
+        sudo installer -package /Volumes/gfortran-Intel-12.1-Monterey/gfortran-Intel-12.1-Monterey/gfortran.pkg -target /
         sudo hdiutil detach /Volumes/gfortran-Intel-12.1-Monterey
     - run: >    
         which gfortran

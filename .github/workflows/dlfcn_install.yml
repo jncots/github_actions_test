@@ -1,0 +1,58 @@
+name: dlfcn-install
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        include:
+          - os: macos-12
+            python-version: "3.10"
+      fail-fast: false
+    steps:
+    # - uses: actions/checkout@master
+    #   with:
+    #     name: dlfcn-win32/dlfcn-win32
+    #     ref: refs/heads/release
+    
+    # - uses: actions/setup-python@v2
+    #   with:
+    #     python-version: ${{ matrix.python-version }}
+
+    # - uses: awvwgk/setup-fortran@main
+    #   id: setup-fortran
+    #   with:
+    #     compiler: gcc
+    #     version: 11
+
+    # - run: gcc -v -o hello.exe hello.c
+
+    - run: |
+        curl -LJO https://github.com/fxcoudert/gfortran-for-macOS/releases/download/4.9.2/gfortran-4.9.2-Yosemite.dmg
+        hdiutil attach gfortran-4.9.2-Yosemite.dmg
+        sudo installer -package /Volumes/gfortran-4.9.2-Yosemite/gfortran.pkg -target /
+        sudo hdiutil detach /Volumes/gfortran-4.9.2-Yosemite
+    - run: >    
+        which gfortran
+        export PATH=$PATH:/usr/local/gfortran/bin
+        which gfortran  
+
+    # - uses: actions/checkout@v3
+    #   with:
+    #     submodules: true
+
+    # - uses: actions/setup-python@v2
+    #   with:
+    #     python-version: ${{ matrix.python-version }}
+    # - uses: awvwgk/setup-fortran@main
+    #   id: setup-fortran
+    #   with:
+    #     compiler: gcc
+    #     version: 11
+    # - run: python -m pip install --upgrade pip
+    # - run: python -m pip install cmake
+    # - run: curl -L

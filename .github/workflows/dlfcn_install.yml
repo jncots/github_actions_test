@@ -32,10 +32,10 @@ jobs:
     # - run: gcc -v -o hello.exe hello.c
 
     - run: |
-        curl -LJO https://github.com/fxcoudert/gfortran-for-macOS/releases/download/4.9.2/gfortran-4.9.2-Yosemite.dmg
-        hdiutil attach gfortran-4.9.2-Yosemite.dmg
-        sudo installer -package /Volumes/gfortran-4.9.2-Yosemite/gfortran.pkg -target /Applications
-        sudo hdiutil detach /Volumes/gfortran-4.9.2-Yosemite
+        curl -LJO https://github.com/fxcoudert/gfortran-for-macOS/releases/download/12.1-monterey/gfortran-Intel-12.1-Monterey.dmg
+        hdiutil attach gfortran-Intel-12.1-Monterey.dmg
+        sudo installer -package /Volumes/gfortran-Intel-12.1-Monterey/gfortran.pkg -target /
+        sudo hdiutil detach /Volumes/gfortran-Intel-12.1-Monterey
     - run: >    
         which gfortran
         export PATH=$PATH:/usr/local/gfortran/bin

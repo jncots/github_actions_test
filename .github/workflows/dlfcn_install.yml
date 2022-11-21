@@ -32,12 +32,16 @@ jobs:
     # - run: gcc -v -o hello.exe hello.c
 
     - run: |
+        which gfortran
+        gfortran --version
         curl -LJO https://github.com/fxcoudert/gfortran-for-macOS/releases/download/12.1-monterey/gfortran-Intel-12.1-Monterey.dmg
         hdiutil attach gfortran-Intel-12.1-Monterey.dmg
         sudo installer -package /Volumes/gfortran-Intel-12.1-Monterey/gfortran-Intel-12.1-Monterey/gfortran.pkg -target /
         sudo hdiutil detach /Volumes/gfortran-Intel-12.1-Monterey
-    - run: >    
+    - run: |    
         which gfortran
+        gfortran --version
+        ls /usr/local/gfortran/bin
         export PATH=$PATH:/usr/local/gfortran/bin
         which gfortran  
 

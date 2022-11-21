@@ -34,7 +34,7 @@ jobs:
     - run: |
         curl -LJO https://github.com/fxcoudert/gfortran-for-macOS/releases/download/4.9.2/gfortran-4.9.2-Yosemite.dmg
         hdiutil attach gfortran-4.9.2-Yosemite.dmg
-        sudo installer -package /Volumes/gfortran-4.9.2-Yosemite/gfortran.pkg -target /usr/local/
+        sudo installer -package /Volumes/gfortran-4.9.2-Yosemite/gfortran.pkg -target /Applications
         sudo hdiutil detach /Volumes/gfortran-4.9.2-Yosemite
     - run: >    
         which gfortran

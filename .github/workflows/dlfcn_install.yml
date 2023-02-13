@@ -22,16 +22,16 @@ jobs:
     - if: ${{ matrix.os != 'windows-latest'}}
       name: Macos or Linux
       run: |
-        which python
-        ls -halt .github/workflows
-        python .github/workflows/get_env.py && source .github/workflows/set_virtual_env.sh
+        python .github/workflows/get_env.py
+        source .github/workflows/set_virtual_env.sh
         printenv
 
     - if: ${{ matrix.os == 'windows-latest'}}
       name: Windows
       run: |
-        python .github/workflows/get_env.py && .github/workflows/set_virtual_env.cmd
-        set   
+        python .github/workflows/get_env.py
+        .github/workflows/set_virtual_env.ps1
+        dir Env:   
 
 
     # - uses: actions/checkout@master

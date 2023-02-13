@@ -1,0 +1,1 @@
+$Env:VIRTUAL_ENV="C:\Users\Anton\AppData\Local\Microsoft\WindowsApps"

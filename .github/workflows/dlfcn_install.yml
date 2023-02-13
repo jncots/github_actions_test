@@ -11,14 +11,13 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         arch: [native]
-        python-version: "3.8"
       fail-fast: false
     steps:
     - uses: actions/checkout@v2
 
     - uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.8
 
     - if: ${{ matrix.os == 'ubuntu-latest'}}
       name: Macos or Linux

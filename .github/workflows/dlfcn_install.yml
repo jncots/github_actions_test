@@ -10,14 +10,26 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-latest
-            arch: native
-            py: "3.10"
+          os: [windows-latest, macos-latest, ubuntu-latest]
+          arch: [native]
       fail-fast: false
     steps:
-    - name: Test CI and print all env variables
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - if: ${{ matrix.os != 'windows-latest'}}
+      name: Macos or Linux
       run: |
+        python .github/workflows/get_env.py && source .github/workflows/set_virtual_env.sh
         printenv
+
+    - if: ${{ matrix.os == 'windows-latest'}}
+      name: Windows
+      run: |
+        python .github/workflows/get_env.py && .github/workflows/set_virtual_env.cmd
+        set   
 
 
     # - uses: actions/checkout@master

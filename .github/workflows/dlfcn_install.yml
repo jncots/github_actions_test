@@ -19,12 +19,21 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - if: ${{ matrix.os != 'windows-latest'}}
+    - if: ${{ matrix.os == 'ubuntu-latest'}}
       name: Macos or Linux
       run: |
+        set -xe
         python .github/workflows/get_env.py
         source .github/workflows/set_virtual_env.sh
         printenv
+
+    - if: ${{ matrix.os == 'macos-latest'}}
+      name: Macos or Linux
+      run: |
+        set -xe
+        python .github/workflows/get_env_mac.py
+        source .github/workflows/set_virtual_env.sh
+        printenv    
 
     - if: ${{ matrix.os == 'windows-latest'}}
       name: Windows

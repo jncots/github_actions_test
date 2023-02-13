@@ -1,4 +1,3 @@
-import platform
 import sys
 import os
 import stat
@@ -8,14 +7,9 @@ from pathlib import Path
 env_variable = "VIRTUAL_ENV"
 env_variable_value = str(Path(sys.executable).absolute().parents[1])
 
-if platform.system() == "Windows":
-    ext = ".ps1"
-    cov = '"'
-    envv = "$Env:"
-    script = f'{envv}{env_variable}={cov}{env_variable_value}{cov}'
-else: 
-    ext = ".sh"
-    script = f'export {env_variable}="{env_variable_value}"'
+
+ext = ".sh"
+script = f'export {env_variable}="{env_variable_value}"'
     
 script_file_path = Path(__file__).parent / f"set_virtual_env{ext}" 
 

@@ -9,9 +9,8 @@ jobs:
 
     strategy:
       matrix:
-        include:
-          os: [windows-latest, macos-latest, ubuntu-latest]
-          arch: [native]
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        arch: [native]
       fail-fast: false
     steps:
 

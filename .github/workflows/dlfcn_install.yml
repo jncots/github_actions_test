@@ -13,6 +13,7 @@ jobs:
         arch: [native]
       fail-fast: false
     steps:
+    - uses: actions/checkout@v2
 
     - uses: actions/setup-python@v4
       with:
@@ -22,7 +23,7 @@ jobs:
       name: Macos or Linux
       run: |
         which python
-        ls -halt ${pwd}/.github/workflows
+        ls -halt .github/workflows
         python .github/workflows/get_env.py && source .github/workflows/set_virtual_env.sh
         printenv
 

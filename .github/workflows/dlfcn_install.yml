@@ -22,7 +22,7 @@ jobs:
       name: Macos or Linux
       run: |
         which python
-        ls -halt .github/workflows
+        ls -halt ${pwd}/.github/workflows
         python .github/workflows/get_env.py && source .github/workflows/set_virtual_env.sh
         printenv
 

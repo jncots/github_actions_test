@@ -10,9 +10,7 @@ env_variable_value = str(Path(sys.executable).absolute().parents[1])
 
 if platform.system() == "Windows":
     ext = ".ps1"
-    cov = '"'
-    envv = "$Env:"
-    script = f'{envv}{env_variable}={cov}{env_variable_value}{cov}'
+    script = f'$Env:{env_variable}="{env_variable_value}"'
 else: 
     ext = ".sh"
     script = f'export {env_variable}="{env_variable_value}"'

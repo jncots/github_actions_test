@@ -2,9 +2,11 @@ name: github_condition_tests
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-     - 'v*'
+
+  
+  # push:
+  #   tags:
+  #    - 'v*'
 
 jobs:
   Test_conditions:

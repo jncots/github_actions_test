@@ -17,9 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - if: |
-          ${{ github.event_name == 'workflow_dispatch' ||
-          (github.event.base_ref == 'refs/heads/master' && startsWith(github.ref, 'refs/tags/v')) }}
+      - if: ${{ github.event_name == 'workflow_dispatch' || (github.event.base_ref == 'refs/heads/master' && startsWith(github.ref, 'refs/tags/v')) }}
         name: Show variables0
         run: echo '${{ toJSON(github) }}'
 
@@ -35,5 +33,5 @@ jobs:
         name: Test 2
         run: echo Test 2
       
-      - name: Show variables2
+      - name: Show variables1
         run: echo '${{ toJSON(github) }}'

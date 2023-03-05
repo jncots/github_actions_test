@@ -14,7 +14,6 @@ on:
 
 jobs:
   Test_conditions:
-    name: Print GITHUB CONTEXT
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

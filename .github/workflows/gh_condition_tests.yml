@@ -1,35 +1,32 @@
 name: github_condition_tests
-
 on:
   workflow_dispatch:
   push:
     tags:
-    - v*
-
+      - v*
   pull_request:
     branches:
       - master
     types:
       - closed
 
+
 jobs:
   Test_conditions:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
       - if: github.event.base_ref == 'master' && startsWith(github.ref, 'refs/tags/v')
         name: Show variables
         run: echo '${{ toJSON(github) }}'
-
-
+      
       - if: startsWith(github.ref, 'refs/tags/v')
         name: Test 1
-        run: echo Test 1 
-
+        run: echo Test 1
+      
       - if: github.event_name == 'push'
         name: Test 2
-        run: echo Test 2  
-
-      name: Show variables1
-      run: echo '${{ toJSON(github) }}'    
+        run: echo Test 2
+      
+      - name: Show variables1
+        run: echo '${{ toJSON(github) }}'

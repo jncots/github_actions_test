@@ -6,6 +6,11 @@ on:
     tags:
     - v*
 
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
 
 jobs:
   Test_conditions:

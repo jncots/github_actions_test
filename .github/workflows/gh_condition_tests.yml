@@ -13,6 +13,7 @@ on:
 
 jobs:
   Test_conditions:
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.base_ref == 'refs/heads/master' && startsWith(github.ref, 'refs/tags/v')) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
